@@ -8,7 +8,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     get root_url
     assert_response :success
     assert_select "title", @base_title
-    assert_select "h1", "Sample App"
+    assert_select "h1", "Welcome to the Sample App"
   end
 
   test "should get help" do
