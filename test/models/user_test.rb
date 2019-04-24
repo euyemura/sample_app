@@ -58,4 +58,12 @@ class UserTest < ActiveSupport::TestCase
     assert_not duplicate_user.valid?
     p duplicate_user.errors.messages
   end
+  
+  test "email addresses should be saved as lower-case" do
+    mixed_case_email = "Foo@ExaMpLe.coM"
+    @user.email = mixed_case_email
+    @user.save
+    assert_equal @user.reload.email, mixed_case_email.downcase
+    # they did this in the opposite order but it shouldn't matter right.
+  end
 end
