@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(name: 'Example User', email: 'example_user@test.com')
+    @user = User.new(name: 'Example User', email: 'example_user@test.com', password: "foobar", password_confirmation: "foobar")
   end
 
   test "should be valid" do
@@ -27,7 +27,6 @@ class UserTest < ActiveSupport::TestCase
   test "names that are too long should be invalid" do
     @user.name = "h" * 51
     assert_not @user.valid?
-    p "here are name length errors, #{@user.errors.full_messages}"
   end
 
   test "email should not be too long" do
@@ -56,14 +55,23 @@ class UserTest < ActiveSupport::TestCase
     duplicate_user.email = @user.email.upcase
     @user.save
     assert_not duplicate_user.valid?
-    p duplicate_user.errors.messages
   end
-  
+
   test "email addresses should be saved as lower-case" do
     mixed_case_email = "Foo@ExaMpLe.coM"
     @user.email = mixed_case_email
     @user.save
     assert_equal @user.reload.email, mixed_case_email.downcase
     # they did this in the opposite order but it shouldn't matter right.
+  end
+
+  test "password should not be blank" do
+    @user.password = @user.password_confirmation = " " * 6
+    assert_not @user.valid?
+  end
+
+  test "password must be at least 6 characters long" do
+    @user.password = @user.password_confirmation = "a" * 5
+    assert_not @user.valid?
   end
 end
