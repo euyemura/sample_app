@@ -1,9 +1,15 @@
 <% provide(:title, @user.name) %>
 
-<h1>
-  <%= gravatar_for @user %>
-  <%= @user.name %>
-</h1>
+<div class="row">
+  <aside class= "col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for(@user, size: 80) %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
 <p>The current time is: <%= Time.now %></p>
 <p>The user was created at <%= @user.created_at %></p>
 <p>The user was last updated at <%= @user.updated_at %></p>
