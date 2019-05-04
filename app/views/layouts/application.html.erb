@@ -3,7 +3,7 @@
   <%= render 'layouts/head' %>
   <body>
     <%= render 'layouts/header' %>
-    <div class="container">
+    <div class="container container-body">
       <%= yield %>
       <%= render 'layouts/footer' %>
       <%= debug(params) if Rails.env.development? %>
