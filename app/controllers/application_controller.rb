@@ -7,4 +7,5 @@ class ApplicationController < ActionController::Base
     #so self is the ApplicationController object, i dont think its actually the class. yes it's just an instance of ApplicationController
     # see here, really what the original was doing was just calling a method called render, and now i want to output what exactly self is, because thats what render should be being called upon.
   end
+	include SessionsHelper
 end
